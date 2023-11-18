@@ -6,6 +6,23 @@ export default async function Home() {
   );
   const weatherData = await res.json();
 
+  function getDayName(daysInFuture) {
+    const daysOfWeek = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    const today = new Date();
+    const futureDate = new Date();
+    futureDate.setDate(today.getDate() + daysInFuture);
+
+    return daysOfWeek[futureDate.getDay()];
+  }
+
   return (
     <div>
       <div className="p-2">
@@ -29,9 +46,14 @@ export default async function Home() {
           <p>max: {weatherData.dayIntervals[1].temperature.max}°C</p>
         </div>
         <div>
-          <p>temperatures the day after</p>
+          <p>temperatures {getDayName(2)}</p>
           <p>min: {weatherData.dayIntervals[2].temperature.min}°C</p>
           <p>max: {weatherData.dayIntervals[2].temperature.max}°C</p>
+        </div>
+        <div>
+          <p>temperatures {getDayName(3)}</p>
+          <p>min: {weatherData.dayIntervals[3].temperature.min}°C</p>
+          <p>max: {weatherData.dayIntervals[3].temperature.max}°C</p>
         </div>
       </div>
     </div>
