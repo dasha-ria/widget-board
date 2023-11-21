@@ -6,7 +6,7 @@ export default async function Home() {
   );
   const weatherData = await res.json();
 
-  function getDayName(daysInFuture) {
+  function getDayName(daysInFuture: number) {
     const daysOfWeek = [
       "Sunday",
       "Monday",
@@ -16,9 +16,9 @@ export default async function Home() {
       "Friday",
       "Saturday",
     ];
-    const today = new Date();
+
     const futureDate = new Date();
-    futureDate.setDate(today.getDate() + daysInFuture);
+    futureDate.setDate(futureDate.getDate() + daysInFuture);
 
     return daysOfWeek[futureDate.getDay()];
   }
