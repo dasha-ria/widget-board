@@ -56,6 +56,33 @@ export default async function Home() {
           <p>max: {weatherData.dayIntervals[3].temperature.max}°C</p>
         </div>
       </div>
+
+      <div className="">
+        <p className="p-2">Widget size samples</p>
+        <div className="grid grid-cols-[repeat(6,200px)] auto-rows-[200px] gap-8 justify-center">
+          <Widget size="small" className="bg-pink-500"></Widget>
+          <Widget size="large" className="bg-purple-500"></Widget>
+        </div>
+      </div>
     </div>
   );
+}
+
+function Widget({
+  size = "small",
+  className = "",
+}: {
+  size?: "small" | "medium" | "large";
+  className?: string;
+}) {
+  const classes = ["rounded-xl", ...className.split(" ")];
+
+  if (size === "small") {
+    classes.push("col-span-1", "row-span-1");
+  } else if (size === "medium") {
+    classes.push("col-span-2", "row-span-1");
+  } else if (size === "large") {
+    classes.push("col-span-2", "row-span-2");
+  }
+  return <div className={classes.join(" ")}></div>;
 }
