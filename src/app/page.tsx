@@ -24,213 +24,80 @@ export default async function Home() {
     return daysOfWeek[futureDate.getDay()];
   }
 
-  function roundNumber(num: number) {
-    return Math.round(num);
-  }
-
   function getCurrentHour() {
     const now = new Date();
-    let currentHour = now.getHours();
-    let currentMinute = now.getMinutes();
 
-    return `${currentHour < 10 ? "0" : ""}${currentHour}:${
-      currentMinute < 10 ? "0" : ""
-    }${currentMinute}`;
+    return now.toLocaleTimeString("sv-SE", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
   }
 
-  function getHourFromData(data: any) {
-    const date = new Date(data);
-    return date.getHours().toString().padStart(2, "0");
+  function getHourFromData(date: any) {
+    const newDate = new Date(date);
+    return newDate.getHours().toString().padStart(2, "0");
   }
 
   return (
-    <div>
-      <div className="p-2">
-        <div>
-          <p>temperature right now</p>
-          <p>{weatherData.shortIntervals[0].temperature.value}°C</p>
-        </div>
-        <div>
-          <p>wind speed right now</p>
-          <p>{weatherData.shortIntervals[0].wind.speed} m/s</p>
-        </div>
-        <div>
-          <p>precipitation right now</p>
-          <p>{weatherData.shortIntervals[0].precipitation.value} mm</p>
-        </div>
-      </div>
-      <div className="p-2">
-        <div>
-          <p>temperatures tomorrow</p>
-          <p>min: {weatherData.dayIntervals[1].temperature.min}°C</p>
-          <p>max: {weatherData.dayIntervals[1].temperature.max}°C</p>
-        </div>
-        <div>
-          <p>temperatures {getDayName(2)}</p>
-          <p>min: {weatherData.dayIntervals[2].temperature.min}°C</p>
-          <p>max: {weatherData.dayIntervals[2].temperature.max}°C</p>
-        </div>
-        <div>
-          <p>temperatures {getDayName(3)}</p>
-          <p>min: {weatherData.dayIntervals[3].temperature.min}°C</p>
-          <p>max: {weatherData.dayIntervals[3].temperature.max}°C</p>
-        </div>
-      </div>
-
-      <div className="">
-        <p className="p-2">Widget size samples</p>
-        <div className="grid grid-cols-[repeat(6,200px)] auto-rows-[200px] gap-8 justify-center">
-          <Widget size="small" className="bg-pink-500"></Widget>
-          <Widget size="large" className="bg-purple-500">
-            <div>
-              {/* weather right now */}
-              <div className="pt-8 flex">
-                <p className="text-black text-4xl">
-                  {roundNumber(currentWeatherData.temperature.value)}°
+    <div className="">
+      <p className="p-2">Widget size samples</p>
+      <div className="grid grid-cols-[repeat(6,200px)] auto-rows-[200px] gap-8 justify-center">
+        <Widget size="small" className="bg-pink-500"></Widget>
+        <Widget size="large" className="bg-purple-500">
+          <div>
+            {/* weather right now */}
+            <div className="pt-8 flex">
+              <p className="text-black text-4xl">
+                {Math.round(currentWeatherData.temperature.value)}°
+              </p>
+              <p></p>
+              <div className="flex gap-2">
+                <p>
+                  H: {Math.round(weatherData.dayIntervals[0].temperature.max)}°
                 </p>
-                <div className="flex gap-2">
-                  <p>
-                    H:{" "}
-                    {roundNumber(weatherData.dayIntervals[0].temperature.max)}°
-                  </p>
-                  <p>
-                    L:{" "}
-                    {roundNumber(weatherData.dayIntervals[0].temperature.min)}°
-                  </p>
-                </div>
-              </div>
-              {/* weather in the following hours */}
-              <div className="flex gap-4">
-                <div className="flex flex-col">
-                  <p>{getCurrentHour()}</p>
-                  <p>{roundNumber(currentWeatherData.temperature.value)}°</p>
-                </div>
-                <div className="flex flex-col">
-                  <p>{getHourFromData(weatherData.shortIntervals[0].start)}</p>
-                  <p>
-                    {roundNumber(
-                      weatherData.shortIntervals[0].temperature.value
-                    )}
-                    °
-                  </p>
-                </div>
-                <div className="flex flex-col">
-                  <p>{getHourFromData(weatherData.shortIntervals[1].start)}</p>
-                  <p>
-                    {roundNumber(
-                      weatherData.shortIntervals[1].temperature.value
-                    )}
-                    °
-                  </p>
-                </div>
-                <div className="flex flex-col">
-                  <p>{getHourFromData(weatherData.shortIntervals[2].start)}</p>
-                  <p>
-                    {roundNumber(
-                      weatherData.shortIntervals[2].temperature.value
-                    )}
-                    °
-                  </p>
-                </div>
-                <div className="flex flex-col">
-                  <p>{getHourFromData(weatherData.shortIntervals[3].start)}</p>
-                  <p>
-                    {roundNumber(
-                      weatherData.shortIntervals[3].temperature.value
-                    )}
-                    °
-                  </p>
-                </div>
-                <div className="flex flex-col">
-                  <p>{getHourFromData(weatherData.shortIntervals[4].start)}</p>
-                  <p>
-                    {roundNumber(
-                      weatherData.shortIntervals[4].temperature.value
-                    )}
-                    °
-                  </p>
-                </div>
-                <div className="flex flex-col">
-                  <p>{getHourFromData(weatherData.shortIntervals[5].start)}</p>
-                  <p>
-                    {roundNumber(
-                      weatherData.shortIntervals[5].temperature.value
-                    )}
-                    °
-                  </p>
-                </div>
-              </div>
-              {/* weather during the week */}
-              <div className="">
-                <div className="flex gap-2">
-                  <p>{getDayName(2)}</p>
-                  <div className="flex gap-8">
-                    <p>
-                      {roundNumber(weatherData.dayIntervals[2].temperature.min)}
-                      °
-                    </p>
-                    <p>
-                      {roundNumber(weatherData.dayIntervals[2].temperature.max)}
-                      °
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <p>{getDayName(3)}</p>
-                  <div className="flex gap-8">
-                    <p>
-                      {roundNumber(weatherData.dayIntervals[3].temperature.min)}
-                      °
-                    </p>
-                    <p>
-                      {roundNumber(weatherData.dayIntervals[3].temperature.max)}
-                      °
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <p>{getDayName(4)}</p>
-                  <div className="flex gap-8">
-                    <p>
-                      {roundNumber(weatherData.dayIntervals[4].temperature.min)}
-                      °
-                    </p>
-                    <p>
-                      {roundNumber(weatherData.dayIntervals[4].temperature.max)}
-                      °
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <p>{getDayName(5)}</p>
-                  <div className="flex gap-8">
-                    <p>
-                      {roundNumber(weatherData.dayIntervals[5].temperature.min)}
-                      °
-                    </p>
-                    <p>
-                      {roundNumber(weatherData.dayIntervals[5].temperature.max)}
-                      °
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <p>{getDayName(6)}</p>
-                  <div className="flex gap-8">
-                    <p>
-                      {roundNumber(weatherData.dayIntervals[6].temperature.min)}
-                      °
-                    </p>
-                    <p>
-                      {roundNumber(weatherData.dayIntervals[6].temperature.max)}
-                      °
-                    </p>
-                  </div>
-                </div>
+                <p>
+                  L: {Math.round(weatherData.dayIntervals[0].temperature.min)}°
+                </p>
               </div>
             </div>
-          </Widget>
-        </div>
+            {/* weather in the following hours */}
+            <div className="flex gap-4">
+              <div className="flex flex-col">
+                <p>{getCurrentHour()}</p>
+                <p>{Math.round(currentWeatherData.temperature.value)}°</p>
+              </div>
+              <div className="flex flex-col">
+                <p>{getHourFromData(weatherData.shortIntervals[0].start)}</p>
+                <p>
+                  {Math.round(weatherData.shortIntervals[0].temperature.value)}°
+                </p>
+              </div>
+
+              {weatherData.shortIntervals
+                .slice(1, 5)
+                .map((shortInterval: any, index: any) => (
+                  <div key={index} className="flex flex-col">
+                    <p>{getHourFromData(shortInterval.start)}</p>
+                    <p>{Math.round(shortInterval.temperature.value)}</p>
+                  </div>
+                ))}
+            </div>
+            {/* weather during the week */}
+            <div className="">
+              {weatherData.dayIntervals
+                .slice(1, 6)
+                .map((dayInterval: any, index: any) => (
+                  <div key={index} className="flex gap-2">
+                    <p>{getDayName(index + 2)}</p>
+                    <div className="flex gap-8">
+                      <p>{Math.round(dayInterval.temperature.min)}°</p>
+                      <p>{Math.round(dayInterval.temperature.max)}°</p>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          </div>
+        </Widget>
       </div>
     </div>
   );
