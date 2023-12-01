@@ -66,15 +66,9 @@ export default async function Home() {
                 <p>{getCurrentHour()}</p>
                 <p>{Math.round(currentWeatherData.temperature.value)}°</p>
               </div>
-              <div className="flex flex-col">
-                <p>{getHourFromData(weatherData.shortIntervals[0].start)}</p>
-                <p>
-                  {Math.round(weatherData.shortIntervals[0].temperature.value)}°
-                </p>
-              </div>
 
               {weatherData.shortIntervals
-                .slice(1, 5)
+                .slice(1, 6)
                 .map((shortInterval: any, index: any) => (
                   <div key={index} className="flex flex-col">
                     <p>{getHourFromData(shortInterval.start)}</p>
