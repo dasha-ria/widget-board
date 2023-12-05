@@ -177,8 +177,10 @@ function TemperatureSpan({ temperatures, min, max }: TemperatureSpanProps) {
   const globalMin = Math.min(...temperatures);
   const globalMax = Math.max(...temperatures);
 
-  const normalizedMin = normalize(globalMin, globalMax, min) * 100;
-  const normalizedMax = normalize(globalMin, globalMax, max) * 100;
+  const normalizedMin =
+    Math.min(normalize(globalMin, globalMax, min), 0.95) * 100;
+  const normalizedMax =
+    Math.max(normalize(globalMin, globalMax, max), 0.05) * 100;
 
   const length = normalizedMax - normalizedMin;
 
