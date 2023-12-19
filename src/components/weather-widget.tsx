@@ -89,7 +89,7 @@ export default async function WeatherWidget() {
                   ></WeatherIcon>
                 </span>
                 <div className="flex justify-end w-3/4 gap-8 items-center">
-                  <p className="w-10 text-right text-[#6663fd]">
+                  <p className="w-8 text-right text-[#6663fd] font-medium">
                     {Math.round(dayInterval.temperature.min)}°
                   </p>
                   <TemperatureSpan
@@ -103,7 +103,7 @@ export default async function WeatherWidget() {
                     min={Math.round(dayInterval.temperature.min)}
                     max={Math.round(dayInterval.temperature.max)}
                   ></TemperatureSpan>
-                  <p className="w-4 text-right text-[#6663fd] font-medium">
+                  <p className="w-8 text-right text-[#6663fd] font-medium">
                     {Math.round(dayInterval.temperature.max)}°
                   </p>
                 </div>

@@ -22,6 +22,7 @@ type WeatherIconProps = {
     | "snow"
     | "lightrain"
     | "rain"
+    | "heavyrain"
     | "lightsleet"
     | "sleet"
     | "clearsky_day"
@@ -30,7 +31,8 @@ type WeatherIconProps = {
     | "fair_night"
     | "lightrainshowers_day"
     | "lightrainshowers_night"
-    | "fog";
+    | "fog"
+    | "fair_day";
   children?: React.ReactNode;
   className?: string;
 };
@@ -45,6 +47,8 @@ export default function WeatherIcon({
       return <WiCloudy />;
     case "partlycloudy_day":
       return <WiDayCloudy></WiDayCloudy>;
+    case "fair_day":
+      return <WiDayCloudy></WiDayCloudy>;
     case "partlycloudy_night":
       return <WiNightCloudy></WiNightCloudy>;
     case "lightsnow":
@@ -54,6 +58,8 @@ export default function WeatherIcon({
     case "lightrain":
       return <WiRain></WiRain>;
     case "rain":
+      return <WiRain></WiRain>;
+    case "heavyrain":
       return <WiRain></WiRain>;
     case "lightsleet":
       return <WiSleet></WiSleet>;

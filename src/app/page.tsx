@@ -1,3 +1,4 @@
+import Electricity from "@/components/electricity";
 import WeatherWidget from "@/components/weather-widget";
 import Widget from "@/components/widget";
 import Image from "next/image";
@@ -12,6 +13,11 @@ export default function Home() {
           className="bg-gradient-to-tr from-[#BCBBFF] to-[#DAD9FF]"
         ></Widget>
         <WeatherWidget></WeatherWidget>
+        <Widget
+          size="medium"
+          className="bg-gradient-to-tr from-[#BCBBFF] to-[#DAD9FF]"
+        ></Widget>
+        <Electricity></Electricity>
       </div>
     </div>
   );
