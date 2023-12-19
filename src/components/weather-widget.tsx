@@ -58,7 +58,12 @@ export default async function WeatherWidget() {
           </div>
 
           {weatherData.shortIntervals
-            .slice(1, 6)
+            .filter((shortInterval: any) =>
+              getHourFromDate(
+                shortInterval.start !== getHourFromDate(new Date())
+              )
+            )
+            .slice(0, 5)
             .map((shortInterval: any, index: any) => (
               <div key={index} className="flex flex-col gap-1 items-center">
                 <p className="text-[#7f7dff]">
