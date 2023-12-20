@@ -57,8 +57,8 @@ export default async function Electricity() {
 
   const todayPrice = data.viewer.homes[0].currentSubscription.priceInfo.today;
 
-  const maxPrice = Math.max(...todayPrice.map((price) => price.total));
-  const minPrice = Math.min(...todayPrice.map((price) => price.total), 0);
+  const maxPrice = Math.max(...todayPrice.map((price: any) => price.total));
+  const minPrice = Math.min(...todayPrice.map((price: any) => price.total), 0);
   const firstQuartile = (maxPrice + minPrice) * 0.33;
   const secondQuartile = (maxPrice + minPrice) * 0.66;
 
@@ -66,7 +66,7 @@ export default async function Electricity() {
     return (value - min) / (max - min);
   }
 
-  function getPriceColor(price) {
+  function getPriceColor(price: number) {
     if (price < 0) {
       return "blue";
     } else if (price > 5) {
@@ -83,9 +83,10 @@ export default async function Electricity() {
     return Math.round(num * 100);
   }
 
-  function chartFadeColor(hour) {
+  function chartFadeColor(hour: number) {
     let currentHour = parseInt(getHourFromDate(new Date()));
-    if (hour <= currentHour) {
+    console.log(hour);
+    if (hour < currentHour) {
       return {
         opacity: "60%",
       };
@@ -108,7 +109,7 @@ export default async function Electricity() {
           <div className="h-[1px] w-full bg-black/20 absolute top-0"></div>
           <div className="h-[1px] w-full bg-black/20 absolute top-[33%]"></div>
           <div className="h-[1px] w-full bg-black/20 absolute top-[66%]"></div>
-          {todayPrice.map((item, index) => (
+          {todayPrice.map((item: any, index: number) => (
             <div
               key={index}
               className="flex flex-col items-center justify-end h-full"
@@ -125,7 +126,7 @@ export default async function Electricity() {
           ))}
         </div>
         <div className="flex justify-between">
-          {todayPrice.map((item, index) => (
+          {todayPrice.map((_: any, index: number) => (
             <div key={index} className="flex flex-col">
               {index % 2 === 0 ? (
                 <p className="text-center text-xs leading-none">
