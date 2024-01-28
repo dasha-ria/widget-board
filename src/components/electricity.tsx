@@ -68,15 +68,15 @@ export default async function Electricity() {
 
   function getPriceColor(price: number) {
     if (price < 0) {
-      return "blue";
+      return "#7D7CBE";
     } else if (price > 5) {
-      return "black";
+      return "#161478";
     } else if (price > 1.5) {
-      return "red";
+      return "#3431AD";
     } else if (price > 0.8) {
-      return "orange";
+      return "#4F4DBE";
     }
-    return "green";
+    return "#615FBE";
   }
 
   function convertToOre(num: number) {
